@@ -1,0 +1,99 @@
+<%- include("partials/header-create.ejs") %>
+
+<div class="container mb-5">
+    <div class="py-5 text-center">
+    
+    <h2>Share your story </h2>
+    <p class="lead">"Creativity is seeing what others see and thinking what no one else ever thought." – Albert Einstein.</p>
+    </div>
+
+    <div class="row g-5">
+    
+        <div class="col-md-11 col-lg-12">
+            <form class="needs-validation" method="post" action="/home" novalidate="">
+                <div class="row g-3">
+                    <div class="col">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" 
+                            class="form-control" 
+                            name="title" 
+                            id="title" 
+                            placeholder="" 
+                            value="<%- (data.blog) ? data.blog.title : "" %>" 
+                            required="">
+                    <div class="invalid-feedback">
+                        Title is required.
+                    </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="bloggerId" class="form-label">Blogger</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text">@</span>
+                            <input type="text" 
+                                    class="form-control" 
+                                    id="bloggerId" 
+                                    name="bloggerId" 
+                                    placeholder="Blogger ID" 
+                                    required="" 
+                                    fdprocessedid="jvg4qi"
+                                    value="<%- (data.blog) ? data.blog.bloggerId : "" %>" >
+                            <div class="invalid-feedback">
+                            Your Blogger ID is required.
+                          </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="description">Story</label>
+                        <textarea class="form-control" 
+                                    name="description" 
+                                    id="description" 
+                                    rows="3" 
+                                    placeholder="Write your story here..."><%- (data.blog) ? data.blog.description : "" %></textarea>
+                    </div>
+
+                    <div class="col-4">
+                        <label for="category" class="form-label">Category</label>
+                        <select class="form-select" 
+                                name="category" 
+                                id="category" 
+                                required="">
+                            <option value="">Choose...</option>
+                            <% for (let i = 0; i < data.categories.length; i++) { %> 
+                                <% let category = data.categories[i]; %>
+                                <option <%- (data.blog && data.blog.category == category) ? "selected" : "" %>><%= category  %></option>
+                              <% } %>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a valid category.
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <label for="formFile" class="form-label">Uploade Image <span class="text-body-secondary">(Optional)</label>
+                        <input class="form-control" type="file" accept=".jpg,.gif,.png" name="image" id="image" value="">
+                        <input class="collapse" type="text" value="" name="imgBase64" id="imgBase64">
+                        <input class="collapse" type="text" value="<%- (data.blog) ? data.blog.image : "" %>" name="oldBlogImg" id="oldBlogImg">
+                    </div>
+
+                    <div class="col-4">
+                        <img src="<%- (data.blog) ? data.blog.image : "" %>" 
+                                height="100%" 
+                                width="100%" 
+                                id="imgPreview" 
+                                alt="Image preview" />
+                    </div>
+                </div>
+
+                <hr class="my-4">
+                
+                <input class="collapse" type="text" value="<%- (data.blog) ? data.blog.id : "" %>" name="blogId" id="blogId">
+                
+                <button class="w-100 btn btn-primary btn-lg" type="submit">Share and go back to Home</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include("partials/footer.ejs") %>

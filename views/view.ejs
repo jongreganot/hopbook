@@ -1,0 +1,22 @@
+<%- include("partials/header.ejs") %>
+
+<div class="container">
+    <div class="px-4 pt-5 my-5 text-center">
+    <h1 class="display-4 fw-bold text-body-emphasis"><%= blog.title %></h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4"><%= blog.description %></p>
+    </div>
+    <div class="overflow-hidden">
+      <div class="container px-5">
+        <img src="<%= blog.image %>" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy">
+      </div>
+    </div>
+    <form action="/home" method="get">
+      <input type="text" class="collapse" id="category" name="category" value="<%= blog.category %>">
+      <button type="submit" class="btn btn-primary mt-3">Back to Home</button>
+    </form>
+    
+  </div>
+</div>
+
+<%- include("partials/footer.ejs") %>
